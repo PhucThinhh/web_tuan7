@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Đồng hồ đếm ngược</title>
+</head>
+<body>
+
+	<form>
+		<label for="hours">Giờ:</label>
+		<input type="number" id="hours" name="hours" min="0" max="23">
+
+		<label for="minutes">Phút:</label>
+		<input type="number" id="minutes" name="minutes" min="0" max="59">
+
+		<label for="seconds">Giây:</label>
+		<input type="number" id="seconds" name="seconds" min="0" max="59">
+
+		<input type="button" value="Bắt đầu" onclick="startCountdown()">
+	</form>
+
+	<p id="demo"></p>
+
+	<script>
+		var countDownDate;
+
+		function startCountdown() {
+			var hours = parseInt(document.getElementById("hours").value);
+			var minutes = parseInt(document.getElementById("minutes").value);
+			var seconds = parseInt(document.getElementById("seconds").value);
+
+		
+			countDownDate = new Date();
+			countDownDate.setHours(countDownDate.getHours() + hours);
+			countDownDate.setMinutes(countDownDate.getMinutes() + minutes);
+			countDownDate.setSeconds(countDownDate.getSeconds() + seconds);
+
+			
+			var x = setInterval(function() {
+
+			  
+			  var now = new Date().getTime();
+
+			 
+			  var distance = countDownDate - now;
+
+			
+			  var hours = Math.floor(distance / (1000 * 60 * 60));
+			  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			  
+			  document.getElementById("demo").innerHTML = hours + " giờ "
+			  + minutes + " phút " + seconds + " giây ";
+
+			 
+			  if (distance < 0) {
+			    clearInterval(x);
+			    document.getElementById("demo").innerHTML = "Đã hết thời gian!";
+			  }
+			}, 1000);
+		}
+	</script>
+
+</body>
+</html>
